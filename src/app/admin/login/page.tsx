@@ -37,7 +37,7 @@ export default function AdminLogin() {
 
   return (
     <div className="w-full max-w-md">
-      <div className="card p-8">
+      <div className="card p-8 anim-fade-up">
         <div className="flex justify-center mb-6">
           <Logo />
         </div>
@@ -81,7 +81,9 @@ export default function AdminLogin() {
               className="mt-1 w-full rounded-xl border border-[var(--line)] bg-white px-4 py-3 outline-none focus:border-[var(--brand)] tracking-wider"
             />
           </div>
-          {error && <p className="text-sm text-red-600">{error}</p>}
+          {error && (
+            <p key={error} className="text-sm text-red-600 anim-shake">{error}</p>
+          )}
           <button type="submit" disabled={loading} className="cta-primary w-full">
             {loading ? "Entrando..." : "Entrar"}
           </button>

@@ -7,6 +7,7 @@ import {
   whatsappLink,
 } from "@/lib/whatsapp";
 import { Logo } from "./Logo";
+import { WhatsAppIcon } from "./WhatsAppIcon";
 
 export function Footer() {
   const whats = whatsappLink(
@@ -57,6 +58,7 @@ export function Footer() {
             fórmulas e fechar pedidos.
           </p>
           <a href={whats} target="_blank" rel="noopener noreferrer" className="cta-whats">
+            <WhatsAppIcon />
             Atendimento WhatsApp
           </a>
         </div>

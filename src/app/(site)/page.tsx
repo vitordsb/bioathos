@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { ProductCard } from "@/components/ProductCard";
+import { Reveal } from "@/components/Reveal";
+import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { listCategories, listProducts } from "@/lib/queries";
 import {
   whatsappLink,
@@ -59,7 +61,7 @@ export default async function HomePage() {
       {/* HERO */}
       <section className="bioathos-gradient relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-5 lg:px-8 pt-16 pb-20 lg:pt-24 lg:pb-28 grid lg:grid-cols-2 gap-12 items-center">
-          <div>
+          <div className="anim-fade-up">
             <span className="brand-pill mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand)]" />
               Farmácia de manipulação · Barueri
@@ -83,7 +85,8 @@ export default async function HomePage() {
                 rel="noopener noreferrer"
                 className="cta-whats"
               >
-                Conversar com um especialista
+                <WhatsAppIcon />
+                Falar com especialista
               </a>
             </div>
 
@@ -95,7 +98,7 @@ export default async function HomePage() {
             </div>
           </div>
 
-          <div className="relative">
+          <div className="relative anim-fade-up" style={{ animationDelay: "120ms" }}>
             <div className="absolute -top-8 -left-6 w-40 h-40 rounded-full bg-[var(--brand-light)] blur-3xl opacity-60" />
             <div className="absolute bottom-0 right-0 w-56 h-56 rounded-full bg-[var(--accent)] blur-3xl opacity-30" />
             <div className="relative rounded-3xl overflow-hidden shadow-[0_30px_80px_-30px_rgba(15,44,42,0.4)] border border-white">
@@ -123,7 +126,7 @@ export default async function HomePage() {
 
       {/* CATEGORIES */}
       {categories.length > 0 && (
-        <section id="categorias" className="max-w-7xl mx-auto px-5 lg:px-8 py-16">
+        <Reveal as="section" id="categorias" className="max-w-7xl mx-auto px-5 lg:px-8 py-16">
           <div className="flex items-end justify-between flex-wrap gap-4 mb-8">
             <div>
               <span className="brand-pill">Linhas</span>
@@ -152,12 +155,12 @@ export default async function HomePage() {
               </Link>
             ))}
           </div>
-        </section>
+        </Reveal>
       )}
 
       {/* FEATURED */}
       {featured.length > 0 && (
-        <section className="max-w-7xl mx-auto px-5 lg:px-8 py-12">
+        <Reveal as="section" className="max-w-7xl mx-auto px-5 lg:px-8 py-12">
           <div className="flex items-end justify-between flex-wrap gap-4 mb-8">
             <div>
               <span className="brand-pill">Destaques</span>
@@ -171,11 +174,11 @@ export default async function HomePage() {
               <ProductCard key={p.id} product={p} />
             ))}
           </div>
-        </section>
+        </Reveal>
       )}
 
       {/* DIFERENCIAIS */}
-      <section className="bg-white border-y border-[var(--line)] mt-10">
+      <Reveal as="section" className="bg-white border-y border-[var(--line)] mt-10">
         <div className="max-w-7xl mx-auto px-5 lg:px-8 py-20">
           <div className="text-center max-w-2xl mx-auto">
             <span className="brand-pill">Por que Bioathos</span>
@@ -200,10 +203,10 @@ export default async function HomePage() {
             ))}
           </div>
         </div>
-      </section>
+      </Reveal>
 
       {/* ALL PRODUCTS */}
-      <section className="max-w-7xl mx-auto px-5 lg:px-8 py-16">
+      <Reveal as="section" className="max-w-7xl mx-auto px-5 lg:px-8 py-16">
         <div className="flex items-end justify-between flex-wrap gap-4 mb-8">
           <div>
             <span className="brand-pill">Catálogo</span>
@@ -218,10 +221,10 @@ export default async function HomePage() {
             <ProductCard key={p.id} product={p} />
           ))}
         </div>
-      </section>
+      </Reveal>
 
       {/* DEPOIMENTOS */}
-      <section className="bg-[var(--brand-mist)]">
+      <Reveal as="section" className="bg-[var(--brand-mist)]">
         <div className="max-w-7xl mx-auto px-5 lg:px-8 py-20">
           <div className="text-center max-w-2xl mx-auto">
             <span className="brand-pill">Depoimentos</span>
@@ -246,10 +249,10 @@ export default async function HomePage() {
             ))}
           </div>
         </div>
-      </section>
+      </Reveal>
 
       {/* ABOUT */}
-      <section id="sobre" className="max-w-7xl mx-auto px-5 lg:px-8 py-20 grid lg:grid-cols-2 gap-12 items-center">
+      <Reveal as="section" id="sobre" className="max-w-7xl mx-auto px-5 lg:px-8 py-20 grid lg:grid-cols-2 gap-12 items-center">
         <div className="rounded-3xl overflow-hidden border border-[var(--line)]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -287,10 +290,10 @@ export default async function HomePage() {
             </Link>
           </div>
         </div>
-      </section>
+      </Reveal>
 
       {/* CONTACT BLOCK */}
-      <section className="bg-gradient-to-br from-[var(--brand-deep)] to-[var(--brand)] text-white">
+      <Reveal as="section" className="bg-gradient-to-br from-[var(--brand-deep)] to-[var(--brand)] text-white">
         <div className="max-w-7xl mx-auto px-5 lg:px-8 py-16 grid md:grid-cols-3 gap-8 items-center">
           <div className="md:col-span-2">
             <h2 className="font-display text-3xl md:text-4xl leading-tight">
@@ -309,11 +312,12 @@ export default async function HomePage() {
               rel="noopener noreferrer"
               className="cta-whats text-base"
             >
-              Conversar com um especialista
+              <WhatsAppIcon size={20} />
+              Falar com especialista
             </a>
           </div>
         </div>
-      </section>
+      </Reveal>
     </>
   );
 }

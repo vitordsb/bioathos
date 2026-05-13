@@ -63,7 +63,10 @@ export default function CartPage() {
                         className="px-3 py-1.5 text-[var(--brand-deep)] hover:text-[var(--brand)]"
                         aria-label="Diminuir"
                       >−</button>
-                      <span className="px-3 min-w-8 text-center font-semibold">
+                      <span
+                        key={item.quantity}
+                        className="px-3 min-w-8 text-center font-semibold anim-flip inline-block"
+                      >
                         {item.quantity}
                       </span>
                       <button

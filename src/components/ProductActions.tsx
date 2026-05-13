@@ -35,7 +35,7 @@ export function ProductActions({ productId, slug, title, image_url }: Props) {
             className="px-3 py-2 text-[var(--brand-deep)] hover:text-[var(--brand)]"
             aria-label="Diminuir"
           >−</button>
-          <span className="px-3 min-w-8 text-center font-semibold">{qty}</span>
+          <span key={qty} className="px-3 min-w-8 text-center font-semibold anim-flip inline-block">{qty}</span>
           <button
             type="button"
             onClick={() => setQty((q) => q + 1)}
