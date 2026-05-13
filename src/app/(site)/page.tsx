@@ -7,6 +7,8 @@ import {
   STORE_PHONE_DISPLAY,
 } from "@/lib/whatsapp";
 
+export const dynamic = "force-dynamic";
+
 const DIFERENCIAIS = [
   { t: "Dupla checagem de qualidade", d: "Laudos técnicos em cada lote." },
   { t: "Matéria-prima certificada", d: "Rastreabilidade do fornecedor ao frasco." },
