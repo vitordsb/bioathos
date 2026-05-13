@@ -36,7 +36,7 @@ export function ProductCard({ product }: { product: ProductWithCategory }) {
         )}
         <div className="mt-auto flex items-center justify-between pt-3">
           <span className="text-sm font-semibold text-[var(--brand-deep)]">
-            {product.price ? product.price : "Consultar"}
+            {product.price ? product.price : "Comprar"}
           </span>
           <span className="text-sm btn-ghost">
             Ver detalhes →
