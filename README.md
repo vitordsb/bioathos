@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Bioathos — Marketplace + Admin
 
-## Getting Started
+Plataforma monolito (Next.js + SQLite) para a Bioathos Farmácia de Manipulação.
+Marketplace público no domínio raiz, painel de administração em `/admin`. Todos
+os CTAs de compra direcionam para o WhatsApp — nada de pagamento na plataforma.
 
-First, run the development server:
+## Stack
+
+- Next.js 16 (App Router + Turbopack)
+- TypeScript + Tailwind v4
+- SQLite via `better-sqlite3` (arquivo local em `./data/bioathos.db`)
+- Upload de imagens em `./public/uploads/` (servido estaticamente)
+- Server Actions para todo o CRUD do admin
+
+## Rodando
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cd app
+pnpm install
+pnpm dev          # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Na primeira execução o banco é criado e populado com os produtos iniciais
+(sementes em `src/lib/seed.ts`).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Variáveis de ambiente
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copie `.env.example` para `.env.local`:
 
-## Learn More
+| Variável                      | Default             | Para que serve                        |
+| ----------------------------- | ------------------- | ------------------------------------- |
+| `ADMIN_PASSWORD`              | `bioathos2026`      | Senha de acesso ao `/admin`           |
+| `ADMIN_SECRET`                | (troque em prod)    | Assina o cookie de sessão do admin    |
+| `NEXT_PUBLIC_WHATSAPP_NUMBER` | `5511914260203`     | Número usado em todos os CTAs do site |
+| `NEXT_PUBLIC_SITE_URL`        | `http://localhost…` | URL pública incluída nos links wpp    |
 
-To learn more about Next.js, take a look at the following resources:
+## Rotas
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Rota                | Descrição                                        |
+| ------------------- | ------------------------------------------------ |
+| `/`                 | Landing premium + destaques + catálogo + sobre   |
+| `/produtos`         | Catálogo com filtro por categoria                |
+| `/produtos/[slug]`  | Página do produto + add ao carrinho + wpp direto |
+| `/carrinho`         | Carrinho em localStorage + checkout via WhatsApp |
+| `/admin/login`      | Login do painel                                  |
+| `/admin`            | Dashboard                                        |
+| `/admin/produtos`   | Lista, criar, editar e excluir produtos          |
+| `/admin/categorias` | Criar e excluir categorias                       |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Fluxo de compra
 
-## Deploy on Vercel
+1. Visitante navega no catálogo → clica em **Adicionar ao carrinho** ou
+   **Comprar pelo WhatsApp**.
+2. Carrinho é persistido em `localStorage`.
+3. Em `/carrinho`, o botão **Finalizar pelo WhatsApp** abre uma conversa
+   pré-formatada para o número da loja com a lista de itens.
+4. Atendimento Bioathos confirma valores, frete e forma de pagamento por lá.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Nenhum pagamento é processado na plataforma.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Persistência
+
+- Banco SQLite em `./data/bioathos.db` (não versionado).
+- Imagens enviadas pelo admin em `./public/uploads/` (não versionado, exceto
+  `seed/` com os produtos iniciais).
+
+Para resetar tudo: pare o servidor, apague `./data` e suba novamente.
+
+## Estrutura
+
+```
+src/
+  app/
+    page.tsx                 # landing
+    produtos/                # catálogo + detalhe
+    carrinho/                # carrinho com checkout wpp
+    admin/                   # painel (login + crud)
+    api/admin/{login,logout,upload}/
+  components/                # Header, Footer, Logo, ProductCard, cart context
+  lib/
+    db.ts                    # better-sqlite3 singleton + schema
+    queries.ts               # CRUD em produtos e categorias
+    auth.ts                  # cookie assinado p/ admin
+    whatsapp.ts              # número + montagem de links wpp
+    seed.ts                  # popula DB na primeira execução
+data/                        # SQLite (gerado em runtime)
+public/uploads/              # imagens enviadas pelo admin
+```
