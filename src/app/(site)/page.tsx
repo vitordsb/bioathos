@@ -169,7 +169,7 @@ export default async function HomePage() {
               </h2>
             </div>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
             {featured.map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}
@@ -216,7 +216,7 @@ export default async function HomePage() {
           </div>
           <Link href="/produtos" className="btn-ghost">Ver catálogo completo →</Link>
         </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-5">
           {all.slice(0, 8).map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}

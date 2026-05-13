@@ -20,26 +20,26 @@ export function ProductCard({ product }: { product: ProductWithCategory }) {
           </span>
         ) : null}
       </div>
-      <div className="p-5 flex-1 flex flex-col gap-2">
+      <div className="p-4 sm:p-5 flex-1 flex flex-col gap-2">
         {product.category_name && (
-          <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--brand)]">
+          <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-[var(--brand)]">
             {product.category_name}
           </span>
         )}
-        <h3 className="font-display text-lg leading-snug text-[var(--ink)]">
+        <h3 className="font-display text-base sm:text-lg leading-snug text-[var(--ink)]">
           {product.title}
         </h3>
         {product.short_description && (
-          <p className="text-sm text-[var(--ink-soft)] line-clamp-2">
+          <p className="hidden sm:block text-sm text-[var(--ink-soft)] line-clamp-2">
             {product.short_description}
           </p>
         )}
-        <div className="mt-auto flex items-center justify-between pt-3">
+        <div className="mt-auto flex items-center justify-between gap-2 pt-3">
           <span className="text-sm font-semibold text-[var(--brand-deep)]">
             {product.price ? product.price : "Comprar"}
           </span>
-          <span className="text-sm btn-ghost">
-            Ver detalhes →
+          <span className="text-sm btn-ghost whitespace-nowrap">
+            Ver →
           </span>
         </div>
       </div>
