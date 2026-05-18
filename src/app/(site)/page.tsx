@@ -16,11 +16,8 @@ const DIFERENCIAIS = [
   { t: "Matéria-prima certificada", d: "Rastreabilidade do fornecedor ao frasco." },
   { t: "Fórmulas inteligentes", d: "Sinergia entre ativos pensada caso a caso." },
   { t: "+100 mil fórmulas", d: "Décadas de prática em manipulação." },
-  { t: "Atendimento farmacêutico", d: "Conversa direta com profissional responsável." },
   { t: "Envio para todo o Brasil", d: "Logística cuidadosa, entrega em 3–5 dias úteis." },
-  { t: "Cruelty-free", d: "Nenhuma fórmula testada em animais." },
   { t: "Gestantes e crianças", d: "Protocolos exclusivos com segurança redobrada." },
-  { t: "Inovação responsável", d: "Tecnologia farmacêutica com propósito." },
 ];
 
 const DEPOIMENTOS = [
@@ -186,7 +183,7 @@ export default async function HomePage() {
               Ciência, cuidado e personalização em cada fórmula
             </h2>
             <p className="mt-4 text-[var(--ink-soft)]">
-              Os nove princípios que sustentam mais de 100 mil fórmulas manipuladas.
+              Os princípios que sustentam mais de 100 mil fórmulas manipuladas.
             </p>
           </div>
           <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
