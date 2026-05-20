@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { ProductCard } from "@/components/ProductCard";
-import { getCategoryBySlug, listCategories, listProducts } from "@/lib/queries";
+import {
+  getCategoryBySlug,
+  listCategories,
+  listProducts,
+  searchProducts,
+} from "@/lib/queries";
 
 export const dynamic = "force-dynamic";
 
@@ -8,10 +13,14 @@ export default async function ProductsPage(props: PageProps<"/produtos">) {
   const searchParams = await props.searchParams;
   const categoria =
     typeof searchParams.categoria === "string" ? searchParams.categoria : undefined;
+  const queryTerm =
+    typeof searchParams.q === "string" ? searchParams.q.trim() : "";
 
   const categories = await listCategories();
   const currentCategory = categoria ? await getCategoryBySlug(categoria) : undefined;
-  const products = await listProducts({ categorySlug: currentCategory?.slug });
+  const products = queryTerm
+    ? await searchProducts(queryTerm, 100)
+    : await listProducts({ categorySlug: currentCategory?.slug });
 
   return (
     <>
@@ -19,11 +28,16 @@ export default async function ProductsPage(props: PageProps<"/produtos">) {
         <div className="max-w-7xl mx-auto px-5 lg:px-8 pt-14 pb-10">
           <span className="brand-pill">Catálogo Bioathos</span>
           <h1 className="font-display text-4xl md:text-5xl text-[var(--brand-deep)] mt-3 max-w-3xl">
-            {currentCategory ? currentCategory.name : "Todos os produtos"}
+            {queryTerm
+              ? `Resultados para “${queryTerm}”`
+              : currentCategory
+              ? currentCategory.name
+              : "Todos os produtos"}
           </h1>
           <p className="mt-4 text-lg text-[var(--ink-soft)] max-w-2xl">
-            Manipulação premium em Barueri. Selecione um produto para conhecer
-            os detalhes e iniciar a conversa pelo WhatsApp.
+            {queryTerm
+              ? `${products.length} produto(s) encontrado(s).`
+              : "Manipulação premium em Barueri. Selecione um produto para conhecer os detalhes e iniciar a conversa pelo WhatsApp."}
           </p>
         </div>
       </section>
@@ -57,7 +71,9 @@ export default async function ProductsPage(props: PageProps<"/produtos">) {
 
         {products.length === 0 ? (
           <div className="rounded-3xl border border-dashed border-[var(--line)] p-12 text-center text-[var(--ink-soft)]">
-            Nenhum produto cadastrado nessa categoria ainda.
+            {queryTerm
+              ? `Nenhum produto encontrado para “${queryTerm}”.`
+              : "Nenhum produto cadastrado nessa categoria ainda."}
           </div>
         ) : (
           <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-5">

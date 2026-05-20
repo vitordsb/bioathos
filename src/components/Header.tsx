@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useCart } from "./cart-context";
 import { Logo } from "./Logo";
+import { SearchBox } from "./SearchBox";
 
 export function Header() {
   const { count } = useCart();
@@ -26,12 +27,14 @@ export function Header() {
           <Logo />
         </Link>
 
-        <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-[var(--ink-soft)]">
+        <nav className="hidden xl:flex items-center gap-6 text-sm font-medium text-[var(--ink-soft)]">
           <Link href="/" className="hover:text-[var(--brand)] transition-colors">Início</Link>
           <Link href="/produtos" className="hover:text-[var(--brand)] transition-colors">Produtos</Link>
           <Link href="/#sobre" className="hover:text-[var(--brand)] transition-colors">Sobre</Link>
           <Link href="/#contato" className="hover:text-[var(--brand)] transition-colors">Contato</Link>
         </nav>
+
+        <SearchBox />
 
         <Link
           href="/carrinho"

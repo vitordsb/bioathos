@@ -76,6 +76,27 @@ export async function listProducts(opts?: {
   `;
 }
 
+export async function searchProducts(query: string, limit = 8): Promise<ProductWithCategory[]> {
+  const trimmed = query.trim();
+  if (!trimmed) return [];
+  const term = `%${trimmed.replace(/[%_\\]/g, (m) => `\\${m}`)}%`;
+  return sql<ProductWithCategory[]>`
+    SELECT p.*, c.name AS category_name, c.slug AS category_slug
+    FROM products p
+    LEFT JOIN categories c ON c.id = p.category_id
+    WHERE
+      p.title ILIKE ${term}
+      OR p.short_description ILIKE ${term}
+      OR p.description ILIKE ${term}
+      OR c.name ILIKE ${term}
+    ORDER BY
+      CASE WHEN p.title ILIKE ${term} THEN 0 ELSE 1 END,
+      p.featured DESC,
+      p.created_at DESC
+    LIMIT ${limit}
+  `;
+}
+
 export async function getProductBySlug(slug: string): Promise<ProductWithCategory | undefined> {
   const rows = await sql<ProductWithCategory[]>`
     SELECT p.*, c.name AS category_name, c.slug AS category_slug
