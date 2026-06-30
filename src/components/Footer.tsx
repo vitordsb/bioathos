@@ -57,10 +57,16 @@ export function Footer() {
             Atendimento personalizado pelo WhatsApp para tirar dúvidas, montar
             fórmulas e fechar pedidos.
           </p>
-          <a href={whats} target="_blank" rel="noopener noreferrer" className="cta-whats">
-            <WhatsAppIcon />
-            Atendimento WhatsApp
-          </a>
+          <div className="flex flex-col items-start gap-3">
+            <a href={whats} target="_blank" rel="noopener noreferrer" className="cta-whats">
+              <WhatsAppIcon />
+              Atendimento WhatsApp
+            </a>
+            {/* Abre o formulário do widget wts.chat (classe escutada pelo loader) */}
+            <button type="button" className="cta-secondary h-widget-trigger">
+              Entrar em contato
+            </button>
+          </div>
         </div>
       </div>
 
