@@ -1,7 +1,8 @@
 export const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "5511914260203";
 export const STORE_PHONE_DISPLAY = "(11) 91426-0203";
 export const STORE_PHONE_LANDLINE = "(11) 4195-0883";
-export const STORE_ADDRESS = "Colégio das Avestruzes, 91 — Centro, Barueri — SP";
+export const STORE_ADDRESS =
+  "Calçada das Anêmonas, 91 — Centro Comercial Alphaville, Barueri — SP";
 export const STORE_INSTAGRAM = "@bioathos";
 
 export function whatsappLink(message: string): string {
