@@ -1,3 +1,5 @@
+import { SITE_URL } from "./site";
+
 export const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "5511914260203";
 export const STORE_PHONE_DISPLAY = "(11) 91426-0203";
 export const STORE_PHONE_LANDLINE = "(11) 4195-0883";
@@ -10,9 +12,8 @@ export function whatsappLink(message: string): string {
 }
 
 export function productInquiryMessage(title: string, slug: string): string {
-  const base = process.env.NEXT_PUBLIC_SITE_URL || "";
-  const url = base ? `${base}/produtos/${slug}` : "";
-  return `Olá, Bioathos! Tenho interesse no produto *${title}*.${url ? `\n${url}` : ""}\nPoderia me passar mais informações e o valor?`;
+  const url = `${SITE_URL}/produtos/${slug}`;
+  return `Olá, Bioathos! Tenho interesse no produto *${title}*.\n${url}\nPoderia me passar mais informações e o valor?`;
 }
 
 export function cartMessage(items: { title: string; quantity: number; slug: string }[]): string {

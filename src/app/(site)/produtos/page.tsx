@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ProductCard } from "@/components/ProductCard";
 import {
@@ -8,6 +9,28 @@ import {
 } from "@/lib/queries";
 
 export const dynamic = "force-dynamic";
+
+// A página de busca ecoa o termo digitado no título. Sem noindex, qualquer
+// palavra jogada no ?q= passa a "existir" dentro do site aos olhos de um
+// crawler. Resultado de busca não entra no índice.
+export async function generateMetadata(props: PageProps<"/produtos">): Promise<Metadata> {
+  const searchParams = await props.searchParams;
+  const isSearch = typeof searchParams.q === "string" && searchParams.q.trim() !== "";
+
+  if (isSearch) {
+    return {
+      title: "Busca — Bioathos",
+      robots: { index: false, follow: true },
+    };
+  }
+
+  return {
+    title: "Catálogo — Bioathos",
+    description:
+      "Cosméticos, suplementação e fórmulas personalizadas manipuladas na Bioathos, em Barueri.",
+    alternates: { canonical: "/produtos" },
+  };
+}
 
 export default async function ProductsPage(props: PageProps<"/produtos">) {
   const searchParams = await props.searchParams;

@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
 import { CartProvider } from "@/components/cart-context";
+import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Bioathos — Farmácia de Manipulação Premium",
   description:
     "Manipulação premium em Barueri. Cosméticos, suplementação e fórmulas personalizadas com qualidade Bioathos.",
