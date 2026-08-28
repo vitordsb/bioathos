@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import Script from "next/script";
 import { usePathname, useSearchParams } from "next/navigation";
 
-const GOOGLE_ADS_ID = "AW-18395031928";
+import { GOOGLE_ADS_ID } from "@/lib/google-ads";
 
 declare global {
   interface Window {
