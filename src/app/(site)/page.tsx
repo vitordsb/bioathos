@@ -74,7 +74,7 @@ export default async function HomePage() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/produtos" className="cta-primary">
-                Conheça nossas fórmulas
+                Nossos produtos
               </Link>
               <a
                 href={specialistWhats}
@@ -83,7 +83,7 @@ export default async function HomePage() {
                 className="cta-whats"
               >
                 <WhatsAppIcon />
-                Falar com especialista
+                Manipule sua fórmula
               </a>
             </div>
 
