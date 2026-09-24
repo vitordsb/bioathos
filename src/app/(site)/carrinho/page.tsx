@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/components/cart-context";
 import { cartMessage, whatsappLink } from "@/lib/whatsapp";
@@ -39,10 +40,11 @@ export default function CartPage() {
                 key={item.productId}
                 className="card p-4 flex gap-4 items-center"
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={item.image_url}
                   alt={item.title}
+                  width={80}
+                  height={96}
                   className="w-20 h-24 object-cover rounded-xl bg-[var(--brand-mist)]"
                 />
                 <div className="flex-1 min-w-0">

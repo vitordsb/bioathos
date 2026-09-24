@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { ProductWithCategory } from "@/lib/db";
 
@@ -8,11 +9,12 @@ export function ProductCard({ product }: { product: ProductWithCategory }) {
       className="card group flex flex-col overflow-hidden"
     >
       <div className="relative aspect-[4/5] bg-[var(--brand-mist)] overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src={product.image_url}
           alt={product.title}
-          className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
+          fill
+          sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
+          className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
         />
         {product.featured ? (
           <span className="absolute top-3 left-3 brand-pill bg-white text-[var(--brand-deep)] shadow-sm">

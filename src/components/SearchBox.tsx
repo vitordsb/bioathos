@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -164,10 +165,11 @@ export function SearchBox() {
                       idx === active ? "bg-[var(--brand-mist)]" : "hover:bg-[var(--brand-mist)]"
                     }`}
                   >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                    <Image
                       src={p.image_url}
                       alt=""
+                      width={44}
+                      height={48}
                       className="w-11 h-12 rounded-lg object-cover bg-[var(--brand-mist)] flex-shrink-0"
                     />
                     <div className="min-w-0 flex-1">

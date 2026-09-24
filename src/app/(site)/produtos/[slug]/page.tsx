@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProductBySlug, listProducts } from "@/lib/queries";
@@ -40,10 +41,13 @@ export default async function ProductDetail(props: PageProps<"/produtos/[slug]">
 
       <section className="max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-2 gap-12 pb-16">
         <div className="rounded-3xl overflow-hidden border border-[var(--line)] bg-[var(--brand-mist)]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={product.image_url}
             alt={product.title}
+            width={1000}
+            height={1250}
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            priority
             className="w-full h-full object-cover"
           />
         </div>
